@@ -1,16 +1,19 @@
-# mobile
+# Study Project
 
-FL client.
+Mobile Application on Flutter for show actual Project from FL.RU
 
-## Getting Started
+For backend server api use https://github.com/unger1984/ts-fl-api
 
-This project is a starting point for a Flutter application.
+## info
 
-A few resources to get you started if this is your first Flutter project:
+Project created as part of the study Flutter
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### status:
+Uncompleted
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### use:
+* Flutter
+* Riverpod
+* Flutter Hooks
+* Dio
+
