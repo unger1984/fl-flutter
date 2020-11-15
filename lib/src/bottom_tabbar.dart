@@ -6,75 +6,66 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'providers/TabbarProvider.dart';
 
 class BottomTabbar extends HookWidget {
+  final PageController pageController;
+
+  BottomTabbar({@required this.pageController});
+
   @override
   Widget build(BuildContext context) {
     final tabbarState = useProvider<TabbarProvider>(tabbarProvider);
 
-    handlePressProjetcs() {
-      if (tabbarState.active != ActiveTab.projects) {
-        tabbarState.setActive(ActiveTab.projects);
-        Navigator.pushNamedAndRemoveUntil(
-            context, "/projects", (route) => false);
+    handleTap(int index) {
+      switch (index) {
+        case 1:
+          tabbarState.setActive(ActiveTab.filter);
+          break;
+        case 2:
+          tabbarState.setActive(ActiveTab.settings);
+          break;
+        case 0:
+        default:
+          tabbarState.setActive(ActiveTab.projects);
+          break;
       }
+      this.pageController.animateToPage(index,
+          duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
     }
 
-    handlePressFilter() {
-      if (tabbarState.active != ActiveTab.filter) {
-        tabbarState.setActive(ActiveTab.filter);
-        Navigator.pushNamedAndRemoveUntil(context, "/filter", (route) => false);
-      }
-    }
-
-    handlePressSetting() {
-      if (tabbarState.active != ActiveTab.settings) {
-        tabbarState.setActive(ActiveTab.settings);
-        Navigator.pushNamedAndRemoveUntil(
-            context, "/settings", (route) => false);
-      }
-    }
-
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.green,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Container(
-            child: IconButton(
-              onPressed: handlePressProjetcs,
-              icon: SvgPicture.asset(
-                'assets/svg/projects.svg',
-                color: tabbarState.active == ActiveTab.projects
-                    ? Colors.white
-                    : Colors.black,
-              ),
-            ),
+    return BottomNavigationBar(
+      backgroundColor: Colors.green,
+      currentIndex: 0,
+      onTap: handleTap,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      items: [
+        BottomNavigationBarItem(
+          icon: SvgPicture.asset(
+            'assets/svg/projects.svg',
+            color: tabbarState.active == ActiveTab.projects
+                ? Colors.white
+                : Colors.black,
           ),
-          Container(
-            child: IconButton(
-              onPressed: handlePressFilter,
-              icon: SvgPicture.asset(
-                'assets/svg/filter.svg',
-                color: tabbarState.active == ActiveTab.filter
-                    ? Colors.white
-                    : Colors.black,
-              ),
-            ),
+          label: '',
+        ),
+        BottomNavigationBarItem(
+          icon: SvgPicture.asset(
+            'assets/svg/filter.svg',
+            color: tabbarState.active == ActiveTab.filter
+                ? Colors.white
+                : Colors.black,
           ),
-          Container(
-            child: IconButton(
-              onPressed: handlePressSetting,
-              icon: SvgPicture.asset(
-                'assets/svg/settings.svg',
-                color: tabbarState.active == ActiveTab.settings
-                    ? Colors.white
-                    : Colors.black,
-              ),
-            ),
+          label: '',
+        ),
+        BottomNavigationBarItem(
+          icon: SvgPicture.asset(
+            'assets/svg/settings.svg',
+            color: tabbarState.active == ActiveTab.settings
+                ? Colors.white
+                : Colors.black,
           ),
-        ],
-      ),
+          label: '',
+        ),
+      ],
     );
   }
 }

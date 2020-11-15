@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile/src/scenes/scene_filter.dart';
-import 'package:mobile/src/scenes/scene_projects.dart';
-import 'package:mobile/src/scenes/scene_settings.dart';
+
+import 'src/scenes/scene_main.dart';
 
 void main() {
   runApp(
     ProviderScope(
       child: MaterialApp(
-        initialRoute: '/projects',
+        initialRoute: '/',
         routes: {
-          '/projects': (BuildContext context) => SceneProjects(),
-          '/filter': (BuildContext context) => SceneFilter(),
-          '/settings': (BuildContext context) => SceneSettings(),
+          '/': (BuildContext context) => SceneMain(),
         },
       ),
     ),
